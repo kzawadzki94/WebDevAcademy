@@ -1,6 +1,6 @@
 ﻿namespace WebDevAcademy.UrlShortener.Models
 {
-    public class ShortenModel
+    public class Url
     {
         public int Id { get; set; }
         public string LongUrl { get; set; }

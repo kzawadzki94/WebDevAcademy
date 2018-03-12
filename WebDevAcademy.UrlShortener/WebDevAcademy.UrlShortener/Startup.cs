@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebDevAcademy.UrlShortener.Interfaces;
+using WebDevAcademy.UrlShortener.Repository;
 
 namespace WebDevAcademy.UrlShortener
 {
@@ -18,13 +20,17 @@ namespace WebDevAcademy.UrlShortener
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddSingleton<IUrlRepository, InMemoryUrlRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseBrowserLink();
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();
+            }
 
             app.UseStaticFiles();
 
@@ -32,7 +38,7 @@ namespace WebDevAcademy.UrlShortener
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Shorten}/{action=Index}/{id?}");
+                    template: "{controller=Url}/{action=Index}");
             });
         }
     }
