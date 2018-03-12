@@ -1,5 +1,14 @@
-﻿@{
+﻿@model List<ShortenModel>
+@{
     ViewData["Title"] = "Shorten your url";
 }
 <div class="row">
+
+    @using (Html.BeginForm("ShortenUrl", "Shorten", FormMethod.Post))
+    {
+        <div class="form-group">
+            <input type="text" class="form-control" name="LongUrl" placeholder="Place your url here..." /><br />
+            <button type="submit" class="btn btn-primary">Shorten!</button>
+        </div>
+    }
 </div>
