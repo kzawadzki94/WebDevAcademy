@@ -1,0 +1,39 @@
+﻿@model List<Url>
+@{
+    ViewData["Title"] = "Shorten your url";
+}
+<div class="row">
+
+    @using (Html.BeginForm("Shorten", "Shortener", FormMethod.Post))
+    {
+        <div class="form-group">
+            <input type="text" class="form-control" name="LongUrl" placeholder="Place your url here..." /><br />
+            <button type="submit" class="btn btn-primary">Shorten!</button>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Long url</th>
+                <th scope="col">Short url</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => item.LongUrl)</td>
+                    <td><a href="/@item.ShortUrl">@item.ShortUrl</a></td>
+                    <td>@Html.ActionLink("Delete", "Delete", "Shortener", item)</td>
+                    <td>@Html.ActionLink("Edit", "Edit", "Shortener", item)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

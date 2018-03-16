@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using WebDevAcademy.UrlShortener.Interfaces;
 using WebDevAcademy.UrlShortener.Models;
 
@@ -12,6 +12,16 @@ namespace WebDevAcademy.UrlShortener.Repository
         public InMemoryUrlRepository()
         {
             _urlsList = new List<Url>();
+        }
+
+        public string GetLongUrl(string hash)
+        {
+            var searchedItem = _urlsList.Where(item => item.ShortUrl.Equals(hash)).FirstOrDefault();
+
+            if (searchedItem == null)
+                return string.Empty;
+
+            return searchedItem.LongUrl;
         }
 
         public List<Url> GetAll()

@@ -38,7 +38,7 @@ namespace WebDevAcademy.UrlShortener
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Url}/{action=Index}");
+                    template: "{controller=Shortener}/{action=Index}");
             });
         }
     }
