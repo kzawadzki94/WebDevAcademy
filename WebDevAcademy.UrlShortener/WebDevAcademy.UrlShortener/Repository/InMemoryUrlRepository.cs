@@ -29,7 +29,7 @@ namespace WebDevAcademy.UrlShortener.Repository
 
         public void Add(Url url)
         {
-            url.Id = _urlsList.Count;
+            url.Id = _urlsList.Any() ? _urlsList.Select(item => item.Id).Last() + 1 : 1;
             _urlsList.Add(url);
         }
 
