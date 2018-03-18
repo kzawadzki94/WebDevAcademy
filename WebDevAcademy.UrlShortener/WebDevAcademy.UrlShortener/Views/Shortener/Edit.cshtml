@@ -1,0 +1,18 @@
+﻿@model Url
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<div class="row">
+    @using (Html.BeginForm("Update", "Shortener", FormMethod.Post))
+    {
+        <div class="form-group">
+            <input type="text" class="form-control" name="LongUrl" value="@Model.LongUrl" /> <br />
+            <input type="text" class="form-control" name="ShortUrl" value="@Model.ShortUrl" readonly="readonly" /> <br />
+            @Html.HiddenFor(model => Model.Id)
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+    }
+</div>

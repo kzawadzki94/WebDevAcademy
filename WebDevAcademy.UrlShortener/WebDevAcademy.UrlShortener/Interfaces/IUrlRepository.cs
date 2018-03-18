@@ -10,5 +10,9 @@ namespace WebDevAcademy.UrlShortener.Interfaces
         List<Url> GetAll();
 
         void Add(Url url);
+
+        void Delete(Url url);
+
+        void Update(Url url);
     }
 }

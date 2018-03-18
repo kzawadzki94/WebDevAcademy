@@ -27,12 +27,12 @@
 
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@Html.DisplayFor(model => item.LongUrl)</td>
-                    <td><a href="/@item.ShortUrl">@item.ShortUrl</a></td>
-                    <td>@Html.ActionLink("Delete", "Delete", "Shortener", item)</td>
-                    <td>@Html.ActionLink("Edit", "Edit", "Shortener", item)</td>
-                </tr>
+            <tr>
+                <td>@Html.DisplayFor(model => item.LongUrl)</td>
+                <td><a href="/@item.ShortUrl">@item.ShortUrl</a></td>
+                <td>@Html.ActionLink("Edit", "Edit", "Shortener", item)</td>
+                <td>@Html.ActionLink("Delete", "Delete", "Shortener", item)</td>
+            </tr>
             }
         </tbody>
     </table>

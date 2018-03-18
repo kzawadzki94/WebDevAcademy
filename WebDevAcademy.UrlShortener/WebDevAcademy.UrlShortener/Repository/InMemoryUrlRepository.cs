@@ -32,5 +32,19 @@ namespace WebDevAcademy.UrlShortener.Repository
             url.Id = _urlsList.Count;
             _urlsList.Add(url);
         }
+
+        public void Delete(Url url)
+        {
+            var urlToRemove = _urlsList.Where(item => item.Id.Equals(url.Id)).SingleOrDefault();
+            _urlsList.Remove(urlToRemove);
+        }
+
+        public void Update(Url url)
+        {
+            var urlToUpdateIndex = _urlsList.FindIndex(item => item.Id.Equals(url.Id));
+
+            if (urlToUpdateIndex != -1)
+                _urlsList[urlToUpdateIndex] = url;
+        }
     }
 }

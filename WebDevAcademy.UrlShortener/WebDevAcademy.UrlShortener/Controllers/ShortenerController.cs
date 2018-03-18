@@ -26,5 +26,25 @@ namespace WebDevAcademy.UrlShortener.Controllers
             }
             return BadRequest("Given URL is not valid");
         }
+
+        [HttpGet]
+        public IActionResult Delete(Url url)
+        {
+            _repository.Delete(url);
+            return Redirect("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Edit(Url url)
+        {
+            return View(url);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Url url)
+        {
+            _repository.Update(url);
+            return Redirect("Index");
+        }
     }
 }

@@ -14,9 +14,7 @@ namespace WebDevAcademy.UrlShortener.Controllers
         public IActionResult Index(string hash)
         {
             if (string.IsNullOrEmpty(hash))
-            {
-                return Redirect("Url");
-            }
+                return Redirect("Shortener");
 
             var redirectionUrl = _repository.GetLongUrl(hash);
 
