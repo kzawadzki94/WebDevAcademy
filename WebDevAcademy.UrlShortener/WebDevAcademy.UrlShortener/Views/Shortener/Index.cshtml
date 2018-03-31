@@ -29,7 +29,7 @@
             {
             <tr>
                 <td>@Html.DisplayFor(model => item.LongUrl)</td>
-                <td><a href="/@item.ShortUrl">@item.ShortUrl</a></td>
+                <td>@Html.ActionLink(item.ShortUrl, "Index", "Redirection", new { hash = item.ShortUrl }, new { target = "_blank"})</td>
                 <td>@Html.ActionLink("Edit", "Edit", "Shortener", item)</td>
                 <td>@Html.ActionLink("Delete", "Delete", "Shortener", item)</td>
             </tr>
