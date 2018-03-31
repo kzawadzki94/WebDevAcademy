@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WebDevAcademy.UrlShortener.Data;
 using WebDevAcademy.UrlShortener.Interfaces;
 using WebDevAcademy.UrlShortener.Repository;
 
@@ -20,7 +22,8 @@ namespace WebDevAcademy.UrlShortener
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddSingleton<IUrlRepository, InMemoryUrlRepository>();
+            services.AddDbContext<UrlContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqlLiteConnection")));
+            services.AddScoped<IUrlRepository, EfUrlRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
