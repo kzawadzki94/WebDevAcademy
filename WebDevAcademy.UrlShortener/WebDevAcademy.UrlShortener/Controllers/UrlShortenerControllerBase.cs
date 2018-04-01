@@ -7,7 +7,7 @@ namespace WebDevAcademy.UrlShortener.Controllers
     {
         protected IUrlRepository _repository;
 
-        public UrlShortenerControllerBase(IUrlRepository repository)
+        protected UrlShortenerControllerBase(IUrlRepository repository)
         {
             _repository = repository;
         }

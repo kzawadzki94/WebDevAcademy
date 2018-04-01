@@ -30,7 +30,7 @@ namespace WebDevAcademy.UrlShortener.Controllers
         [HttpGet]
         public IActionResult Delete(Url url)
         {
-            _repository.Delete(url);
+            _repository.Delete(url.Id);
             return Redirect("Index");
         }
 

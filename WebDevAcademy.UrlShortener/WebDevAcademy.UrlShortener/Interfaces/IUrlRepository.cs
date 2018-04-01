@@ -5,14 +5,18 @@ namespace WebDevAcademy.UrlShortener.Interfaces
 {
     public interface IUrlRepository
     {
+        Url Get(int id);
+
+        (IEnumerable<Url>, int) Get(string search, int skip, int itemsPerPage);
+
         string GetLongUrl(string hash);
 
         List<Url> GetAll();
 
-        void Add(Url url);
+        Url Add(Url url);
 
-        void Delete(Url url);
+        void Delete(int id);
 
-        void Update(Url url);
+        Url Update(Url url);
     }
 }

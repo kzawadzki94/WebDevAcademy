@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 using WebDevAcademy.UrlShortener.Data;
 using WebDevAcademy.UrlShortener.Interfaces;
 using WebDevAcademy.UrlShortener.Repository;
@@ -24,6 +25,8 @@ namespace WebDevAcademy.UrlShortener
             services.AddMvc();
             services.AddDbContext<UrlContext>(options => options.UseSqlite(Configuration.GetConnectionString("SqlLiteConnection")));
             services.AddScoped<IUrlRepository, EfUrlRepository>();
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new Info { Title = "Url Shortener API", Version = "v1" }));
+            services.AddSingleton(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +37,10 @@ namespace WebDevAcademy.UrlShortener
                 app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Url Shortener API v1"));
 
             app.UseStaticFiles();
 
