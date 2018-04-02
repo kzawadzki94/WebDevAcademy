@@ -8,7 +8,7 @@ namespace WebDevAcademy.UrlShortener.Controllers
     [Route("")]
     public class RedirectionController : UrlShortenerControllerBase
     {
-        private IHttpContextAccessor _httpContextAccessor;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
         public RedirectionController(IUrlRepository repository, IHttpContextAccessor httpContextAccessor) : base(repository)
         {
@@ -29,7 +29,7 @@ namespace WebDevAcademy.UrlShortener.Controllers
             if (UniqueVisitsCookieUtil.ReadCookie(_httpContextAccessor, urlToRedirect) != "Visited")
             {
                 UniqueVisitsCookieUtil.WriteCookie(_httpContextAccessor, urlToRedirect);
-                urlToRedirect.UniqueVisits += 1;
+                urlToRedirect.UniqueVisits++;
                 _repository.Update(urlToRedirect);
             }
             if (urlToRedirect.LongUrl.Contains("http://") || urlToRedirect.LongUrl.Contains("https://"))

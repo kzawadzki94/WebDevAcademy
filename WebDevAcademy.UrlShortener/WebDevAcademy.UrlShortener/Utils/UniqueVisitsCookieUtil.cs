@@ -8,8 +8,10 @@ namespace WebDevAcademy.UrlShortener.Utils
     {
         public static void WriteCookie(IHttpContextAccessor httpContextAccessor, Url url)
         {
-            var options = new CookieOptions();
-            options.Expires = DateTime.Now.AddDays(1);
+            var options = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(1)
+            };
             httpContextAccessor.HttpContext.Response.Cookies.Append(url.ShortUrl, "Visited", options);
         }
 
