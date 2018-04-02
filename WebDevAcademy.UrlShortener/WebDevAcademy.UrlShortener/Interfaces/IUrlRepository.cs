@@ -9,7 +9,7 @@ namespace WebDevAcademy.UrlShortener.Interfaces
 
         (IEnumerable<Url>, int) Get(string search, int skip, int itemsPerPage);
 
-        string GetLongUrl(string hash);
+        Url Get(string hash);
 
         List<Url> GetAll();
 

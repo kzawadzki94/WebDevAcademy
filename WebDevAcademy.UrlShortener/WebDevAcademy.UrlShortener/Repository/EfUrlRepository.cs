@@ -35,15 +35,8 @@ namespace WebDevAcademy.UrlShortener.Repository
             return (paginatedLink, linksCount);
         }
 
-        public string GetLongUrl(string hash)
-        {
-            var searchedItem = _db.Urls.Where(item => item.ShortUrl.Equals(hash)).FirstOrDefault();
-
-            if (searchedItem == null)
-                return string.Empty;
-
-            return searchedItem.LongUrl;
-        }
+        public Url Get(string hash)
+            => _db.Urls.Where(item => item.ShortUrl.Equals(hash)).FirstOrDefault();
 
         public List<Url> GetAll()
             => _db.Urls.ToList();

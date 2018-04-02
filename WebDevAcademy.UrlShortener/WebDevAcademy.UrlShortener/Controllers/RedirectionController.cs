@@ -1,13 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using WebDevAcademy.UrlShortener.Interfaces;
+using WebDevAcademy.UrlShortener.Utils;
 
 namespace WebDevAcademy.UrlShortener.Controllers
 {
     [Route("")]
     public class RedirectionController : UrlShortenerControllerBase
     {
-        public RedirectionController(IUrlRepository repository) : base(repository)
+        private IHttpContextAccessor _httpContextAccessor;
+
+        public RedirectionController(IUrlRepository repository, IHttpContextAccessor httpContextAccessor) : base(repository)
         {
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [HttpGet("{hash}")]
@@ -16,15 +21,21 @@ namespace WebDevAcademy.UrlShortener.Controllers
             if (string.IsNullOrEmpty(hash))
                 return Redirect("Shortener");
 
-            var redirectionUrl = _repository.GetLongUrl(hash);
+            var urlToRedirect = _repository.Get(hash);
 
-            if (string.IsNullOrEmpty(redirectionUrl))
+            if (urlToRedirect == null)
                 return NotFound("Site not found!");
 
-            if (redirectionUrl.Contains("http://") || redirectionUrl.Contains("https://"))
-                return Redirect(redirectionUrl);
+            if (UniqueVisitsCookieUtil.ReadCookie(_httpContextAccessor, urlToRedirect) != "Visited")
+            {
+                UniqueVisitsCookieUtil.WriteCookie(_httpContextAccessor, urlToRedirect);
+                urlToRedirect.UniqueVisits += 1;
+                _repository.Update(urlToRedirect);
+            }
+            if (urlToRedirect.LongUrl.Contains("http://") || urlToRedirect.LongUrl.Contains("https://"))
+                return Redirect(urlToRedirect.LongUrl);
             else
-                return Redirect("http://" + redirectionUrl);
+                return Redirect($"http://{urlToRedirect.LongUrl}");
         }
     }
 }
