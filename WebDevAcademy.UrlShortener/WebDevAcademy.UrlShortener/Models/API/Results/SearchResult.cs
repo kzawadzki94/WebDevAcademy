@@ -22,10 +22,12 @@ namespace WebDevAcademy.UrlShortener.Models.API.Results
             Id = url.Id;
             LongUrl = url.LongUrl;
             ShortUrl = url.ShortUrl;
+            UniqueVisits = url.UniqueVisits;
         }
 
         public int Id { get; set; }
         public string LongUrl { get; set; }
         public string ShortUrl { get; set; }
+        public ulong UniqueVisits { get; set; }
     }
 }
