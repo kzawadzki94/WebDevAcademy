@@ -1,0 +1,31 @@
+.linksTable {
+  justify-content: center;
+  table {
+    border-collapse: collapse;
+  }
+  table,
+  th,
+  td {
+    border: 1px solid $color-table-borders;
+  }
+  thead {
+    background-color: $color-table-header;
+    th {
+      color: white;
+    }
+  }
+  tbody {
+    tr {
+      height: auto;
+      &:nth-child(2n) {
+        background-color: $color-table-row-light;
+      }
+      &:nth-child(2n + 1) {
+        background-color: $color-table-row-dark;
+      }
+    }
+    td {
+      padding: 8px;
+    }
+  }
+}

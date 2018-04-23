@@ -1,0 +1,22 @@
+.tablePagination {
+   &-wrapper {
+     justify-content: center;
+     align-items: center;
+   }
+
+  &-prev {
+
+  }
+
+  &-next {
+    text-align: right;
+  }
+
+  &-desc {
+    text-align: center;
+
+    p {
+      line-height: 38px;
+    }
+  }
+ }
