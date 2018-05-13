@@ -1,4 +1,5 @@
 # WebDevAcademy
-ASP.Net Core WebAPI + React Url Shortneer Project
+ASP.Net Core WebAPI + React 
+Url Shortner Project
 
 Assignment for Web Dev Academy workshops.
